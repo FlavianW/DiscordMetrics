@@ -6,6 +6,12 @@ public class DiscordUser {
     private String username;
     private String pfp;
 
+    /**
+     * Constructor for DiscordUser class
+     * @param id Discord user ID
+     * @param username Discord user username
+     * @param pfp Discord user profile picture
+     */
     public DiscordUser(String id, String username, String pfp) {
         this.id = id;
         this.username = username;

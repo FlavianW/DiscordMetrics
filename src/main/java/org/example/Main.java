@@ -25,9 +25,7 @@ public class Main {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
         scheduler.scheduleAtFixedRate(() -> {
-            System.out.println("⏱ Rafraîchissement des utilisateurs à " + java.time.LocalTime.now());
             var users = Functions.getAllUsers(api);
-            System.out.println("👥 Utilisateurs récupérés : " + users.size());
-        }, 0, 20, TimeUnit.SECONDS); // Délai initial 0, puis toutes les 30 sec
+        }, 0, 20, TimeUnit.SECONDS);  //Fetch every 20 seconds
     }
 }

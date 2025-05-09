@@ -24,7 +24,7 @@ public class Functions {
             Set<User> allUsers = ConcurrentHashMap.newKeySet();
             CompletableFuture<Void> done = new CompletableFuture<>();
 
-            // Listener temporaire
+            // Listener
             var listener = api.addServerMembersChunkListener((ServerMembersChunkEvent event) -> {
                 if (!event.getServer().equals(server)) return;
                 allUsers.addAll(event.getMembers());
@@ -34,17 +34,17 @@ public class Functions {
                 }
             });
 
-            // Lancer la demande
+            // Request to get all members to discord
             server.requestMembersChunks();
 
             try {
-                // Attendre max 15 secondes que tous les membres soient reçus
+                // Wait 15 seconds max
                 done.get(15, TimeUnit.SECONDS);
             } catch (Exception e) {
                 System.err.println("⚠️ Timeout ou erreur lors de la récupération des membres du serveur " + server.getName());
             }
 
-            // Nettoyer le listener
+            // Remove listener
             listener.remove();
 
             System.out.println("✅ " + allUsers.size() + " membres reçus pour " + server.getName());
