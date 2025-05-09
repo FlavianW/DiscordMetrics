@@ -25,7 +25,10 @@ public class Main {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
         scheduler.scheduleAtFixedRate(() -> {
-            var users = Functions.getAllUsers(api);
+            var server = api.getServerById("1350167386149617704");
+            if (server.isPresent()) {
+                var users = Functions.getAllUsers(api, server.get());
+            }
         }, 0, 20, TimeUnit.SECONDS);  //Fetch every 20 seconds
     }
 }
