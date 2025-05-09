@@ -24,7 +24,6 @@ public class Functions {
     public static List<DiscordUser> getAllUsers(DiscordApi api, Server seisoCord) {
         List<DiscordUser> seisoCordUsers = new ArrayList<>();
 
-        System.out.println("🔄 Téléchargement des membres du serveur : " + seisoCord.getName());
 
         Set<User> allUsers = ConcurrentHashMap.newKeySet();
         CompletableFuture<Void> done = new CompletableFuture<>();
@@ -52,12 +51,10 @@ public class Functions {
         // Remove listener
         listener.remove();
 
-        System.out.println("✅ " + allUsers.size() + " membres reçus pour " + seisoCord.getName());
 
         for (User user : allUsers) {
             String userPfp = "https://cdn.discordapp.com/avatars/" + user.getIdAsString() + "/" + user.getAvatarHash().orElse("") + "?size=2048";
             DiscordUser userObject = new DiscordUser(user.getIdAsString(), user.getName(), userPfp);
-            System.out.println(userObject.getPfp());
             seisoCordUsers.add(userObject);
         }
 
